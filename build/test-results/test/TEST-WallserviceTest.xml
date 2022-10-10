@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="WallserviceTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2022-10-10T18:16:04" hostname="DESKTOP-ORRJ3F5" time="0.146">
+  <properties/>
+  <testcase name="add" classname="WallserviceTest" time="0.144"/>
+  <testcase name="updateNotExistingPost" classname="WallserviceTest" time="0.0"/>
+  <testcase name="update_existingPost" classname="WallserviceTest" time="0.001"/>
+  <system-out><![CDATA[Post added: Post(id=1, content=asdsad, authorName=almaz, authorid=1, likes=1, comment=null, createdByCommunity=false, createDate=null, publishDate=null, isPinned=false)
+Post added: Post(id=1, content=asdsad, authorName=almaz, authorid=1, likes=1, comment=null, createdByCommunity=false, createDate=null, publishDate=null, isPinned=false)
+Post added: Post(id=1, content=asdsad, authorName=almaz, authorid=1, likes=1, comment=null, createdByCommunity=false, createDate=null, publishDate=null, isPinned=false)
+Updating post with id 1: Post(id=1, content=asdsad, authorName=almazzzup, authorid=1, likes=1, comment=null, createdByCommunity=false, createDate=null, publishDate=null, isPinned=false)
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ru"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>main.kt</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">newkotlin5homeworks</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">main.kt</span></div><h1>main.kt</h1><pre class="source lang-java linenums">import java.time.LocalDateTime
+
+<span class="pc" id="L3">data class Post(</span>
+<span class="fc" id="L4">    val id: Int,</span>
+<span class="fc" id="L5">    val content: String?,</span>
+<span class="pc" id="L6">    val authorName: String? = null,</span>
+<span class="pc" id="L7">    val authorid: Int? = null,</span>
+<span class="pc" id="L8">    val likes: Int? = null,</span>
+<span class="pc" id="L9">    val comment: Comment? = null,</span>
+<span class="pc" id="L10">    val createdByCommunity: Boolean? = null,</span>
+<span class="pc" id="L11">    val createDate: LocalDateTime? = null,</span>
+<span class="pc" id="L12">    val publishDate: LocalDateTime? = null,</span>
+<span class="pc" id="L13">    val isPinned: Boolean? = false,</span>
+<span class="nc" id="L14">)</span>
+
+<span class="nc" id="L16">data class Comment(</span>
+<span class="nc" id="L17">    var commentID: Int,</span>
+<span class="nc" id="L18">    var commentAuthorName: String,</span>
+<span class="nc" id="L19">    var commentContent: String,</span>
+)
+
+object WallService {
+<span class="fc" id="L23">    private var posts = emptyArray&lt;Post&gt;()</span>
+
+    fun add(post: Post): Post {
+<span class="fc" id="L26">        posts += post.copy(id = getLastPostId() + 1)</span>
+<span class="fc" id="L27">        println(&quot;Post added: ${posts.last()}&quot;)</span>
+<span class="fc" id="L28">        return posts.last()</span>
+    }
+
+    fun getLastPostId(): Int {
+<span class="pc bpc" id="L32" title="2 of 4 branches missed.">        return if (posts.isEmpty()) 0 else posts.last().id</span>
+    }
+
+    fun printArray(i: Int) {
+<span class="nc" id="L36">        println(posts.get(i))</span>
+<span class="nc" id="L37">    }</span>
+
+    fun dropPost() {
+<span class="fc" id="L40">        posts = emptyArray&lt;Post&gt;()</span>
+<span class="fc" id="L41">    }</span>
+
+    fun update(post: Post): Boolean {
+<span class="fc" id="L44">        var postUpdating = false</span>
+<span class="fc bfc" id="L45" title="All 2 branches covered.">        for ((idx, currentPost) in posts.withIndex()) {</span>
+<span class="fc bfc" id="L46" title="All 2 branches covered.">            if (post.id == currentPost.id) {</span>
+<span class="fc" id="L47">                posts[idx] = currentPost.copy(</span>
+<span class="fc" id="L48">                    id = post.id,</span>
+<span class="fc" id="L49">                    content = post.content,</span>
+<span class="fc" id="L50">                    authorName = post.authorName,</span>
+<span class="fc" id="L51">                    authorid = post.authorid,</span>
+<span class="fc" id="L52">                    likes = post.likes,</span>
+<span class="fc" id="L53">                    comment = post.comment,</span>
+<span class="fc" id="L54">                    createdByCommunity = post.createdByCommunity,</span>
+<span class="fc" id="L55">                    createDate = post.createDate,</span>
+<span class="fc" id="L56">                    publishDate = post.publishDate,</span>
+<span class="fc" id="L57">                    isPinned = post.isPinned</span>
+                )
+<span class="fc" id="L59">                postUpdating = true</span>
+<span class="fc" id="L60">                println(&quot;Updating post with id ${post.id}: ${posts[idx]}&quot;)</span>
+            }
+        }
+<span class="fc" id="L63">        return postUpdating</span>
+    }
+}
+
+fun main() {
+<span class="nc" id="L68">    WallService.add(Post(1, &quot;Test content&quot;))</span>
+<span class="nc" id="L69">    WallService.add(Post(2, &quot;Test content1&quot;))</span>
+<span class="nc" id="L70">    WallService.add(Post(3, &quot;Test content2&quot;))</span>
+<span class="nc" id="L71">    WallService.printArray(2)</span>
+
+<span class="nc" id="L73">    WallService.update(Post(2, &quot;uzzzzzzzzzzz&quot;, &quot;Vasiliy&quot;))</span>
+<span class="nc" id="L74">}</span>
+
+
+//class WallService {
+//
+//    fun invoke(): Post {
+//
+//        var comment1 = Comment(1,&quot;ZloyAlmaz&quot;,&quot;NONONO&quot;)
+//        var post1 = Post(1,2,&quot;Almaz&quot;,&quot;axaxa&quot;,89,comment1,false
+//        ,LocalDateTime.now(),LocalDateTime.of(2022,12,10,14,5),false)
+//        print(post1.toString())
+//         return post1
+//    }
+//
+//
+//    private var posts = emptyArray&lt;Post&gt;()
+//
+//    fun add(post: Post): Post {
+//        posts += post.copy(id = getLastPostId() + 1)
+//        println(&quot;Post added: ${posts.last()}&quot;)
+//        return posts.last()
+//    }
+//
+//    }
+//    fun printArray (i: Int) {
+//        println(posts.get(i))
+//    }
+//    fun getLastPostId(): Int {
+//        return if (posts.isEmpty()) 0 else posts.last().id
+//    }
+//
+//}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
